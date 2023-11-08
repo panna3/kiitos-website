@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>KIITOS</title>
+        <link href="design.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+    </head>
+    <body>
+            <center>
+            <div id="sketch-container">
+            <script>
+                let cnt=200;
+                let c3 =200;
+                let v0;
+                let v1;
+                let angle = 0;
+                let shape;
+
+                function setup() {
+                    createCanvas(700, 700,WEBGL).parent('sketch-container');
+
+                    shape = new Shape(0,0);
+                }
+                function draw() {
+                    background(0);
+
+                    v0 = createVector(width/2, height/2);
+                    v1 = createVector(c3,0);
+                    
+                    for(i=0;i<10;i++){
+                    drawSq(v0, v1.rotate(angle), color(random(100,cnt), random(100,cnt), random(100,cnt)));
+                    }
+
+                    angle += 0.01;
+                    
+                    if(cnt >= 255){
+                        cnt=200;
+                    }
+                    else{
+                        cnt++;
+                    }
+                    if(v1.x>200)
+                    {
+                        c3=200;
+                        angle =0;
+                    }
+                    else{
+                        c3--;
+                    }
+                    rotateY(frameCount / 30);
+                    shape.show();
+                }
+
+                function drawSq(base, vec, myColor){
+                    push();
+                    stroke(myColor);
+                    strokeWeight(3);
+                    fill(myColor);
+                    rotateY(vec.heading());
+                    rotateX(vec.heading());
+                    rotateZ(vec.heading());
+
+                    rect(vec.x,vec.y,50);
+                    rotate(vec.heading());
+                    
+                    pop();
+                
+                }
+                class Shape{
+                constructor(x,y){
+                    this.x = x-110;
+                    this.y = y;
+                }
+                show(){
+                    fill(255);
+                    stroke(0);
+                    rectMode(CENTER);
+                    strokeWeight(1); 
+                    
+                    //K
+                    stroke("white");
+                    strokeWeight(10);
+                    beginShape();
+                    vertex(this.x,this.y-20);
+                    vertex(this.x,this.y+20);
+                    endShape();
+                    
+                    beginShape();
+                    vertex(this.x+3,this.y);
+                    vertex(this.x+25,this.y-20);
+                    endShape();
+                    
+                    beginShape();
+                    vertex(this.x+5,this.y);
+                    vertex(this.x+28,this.y+20);
+                    endShape();
+                        
+                    //I
+                    beginShape();
+                    vertex(this.x+58,this.y-20);
+                    vertex(this.x+58,this.y+20);
+                    //vertex(this.x+55,this.y-20);
+                    endShape();
+                    beginShape();//top
+                    vertex(this.x+47,this.y-20);
+                    vertex(this.x+69,this.y-20);
+                    endShape();
+                    beginShape();//bottom
+                    vertex(this.x+47,this.y+20);
+                    vertex(this.x+69,this.y+20);
+                    endShape();
+
+                    //I
+                    beginShape();
+                    vertex(this.x+102,this.y-20);
+                    vertex(this.x+102,this.y+20);
+                    endShape();
+                    beginShape();//top
+                    vertex(this.x+91,this.y-20);
+                    vertex(this.x+113,this.y-20);
+                    endShape();
+                    beginShape();//bottom
+                    vertex(this.x+91,this.y+20);
+                    vertex(this.x+113,this.y+20);
+                    endShape();
+                    
+                    //T
+                    beginShape();
+                    vertex(this.x+145,this.y-20);
+                    vertex(this.x+145,this.y+20);
+                    endShape();
+                    beginShape();
+                    vertex(this.x+130,this.y-20);
+                    vertex(this.x+160,this.y-20);
+                    endShape();
+                    
+                    //O
+                    stroke("white");
+                    strokeWeight(10);
+                    noFill();
+                    ellipse(this.x+188,this.y,28,43);
+                    
+                    //S
+                    beginShape();
+                    vertex(this.x+234,this.y-20);
+                    bezierVertex(this.x+220,this.y-15,this.x+220,this.y-5,this.x+225,this.y);
+                    bezierVertex(this.x+235,this.y+5,this.x+235,this.y+15,this.x+225,this.y+20);
+                    endShape();
+                    beginShape();
+                    vertex(this.x+234,this.y-20);
+                    vertex(this.x+235,this.y-20);
+                    endShape();
+                    
+                }
+                }
+            </script>
+   
+        </div>
+    </center>
+        <div id="menu1">
+            <div class="info">
+                導入・リプレース支援<br>
+                    <div class="indent">要求定義支援</div>
+                    <div class="indent">モック制作</div>
+                    <div class="indent">レガシーシステムの解析</div>
+            </div>
+            <span class="space"></span>
+            <div class="info">
+                システム開発<br>
+                    <div class="indent">要件定義</div>
+                    <div class="indent">設計・開発</div>
+                    <div class="indent">結合テスト・総合テスト</div>
+            </div>
+            <span class="space"></span>
+            <div class="info">
+                システム運用保守<br>
+                    <div class="indent">システム監視</div>
+                    <div class="indent">パッチ対応</div>
+                    <div class="indent">問い合わせ対応</div>
+            </div>
+        </div>
+        <div id="menu2">
+            <div class="company1">
+                会社概要<br><br>
+                <div class="indent"><pre class="indent2">会社名         株式会社キートス</pre></div>
+                <div class="indent"><pre class="indent2">所在地         千葉県市原市大厩1241-31</pre></div>
+                <div class="indent"><pre class="indent2">代表電話       050-8890-7204</pre></div>
+                <div class="indent"><pre class="indent2">設立年月日     2023年1月19日</pre></div>
+                <div class="indent"><pre class="indent2">資本金         100万円</pre></div>
+                <div class="indent"><pre class="indent2">代表者         原田浩一</pre></div>              
+            </div>
+            
+            <div class="company2">
+                <br><br>
+                <div class="indent">
+                    <form action="mailto:info@kiitos-inc.jp" method="post" enctype="text/plain">
+                        <input type="submit" class="button" value="お問い合わせはこちらから">
+                    </form>
+                </div>
+                <a href="index-eng.html"><img src="langmark.png" id="img" title="Change Language"></a>
+            </div>
+        </div>
+        <!--
+        <div class="mainmenu">
+            <span id="kiitos"><a href="index.html">KIITOS</a></span>
+            <a class="top" href="#menu1">導入・リプレース支援</a>
+            <a class="top" href="#menu1">システム開発</a>
+            <a class="top" href="#menu1">システム運用保守</a>
+            <a class="top" href="#menu2">会社概要</a>
+            <a class="top" href="#menu2">お問い合わせ</a>
+            <a class="top" href="#">English</a>
+        </div>
+        -->
+    </body>
+</html>
